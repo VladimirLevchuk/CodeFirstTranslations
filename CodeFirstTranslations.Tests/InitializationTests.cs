@@ -2,7 +2,7 @@
 using FluentAssertions;
 using NUnit.Framework;
 
-namespace Creuna.CodeFirstTranslations2.Tests
+namespace CodeFirstTranslations.Tests
 {
     public class InitializationTests
     {
@@ -20,11 +20,11 @@ namespace Creuna.CodeFirstTranslations2.Tests
             var translations = new TranslationClasses("en");
 
             translations
-                .Include<Labels>()
-                .Include<Messages>()
-                .Include<MyEnum>();
+                .Add<Labels>()
+                .Add<Messages>()
+                .Add<MyEnum>();
 
-            translations.GetTranslationClasses().Select(x => x.Name)
+            translations.ToList().Select(x => x.Name)
                 .Should().BeEquivalentTo("Labels", "Messages", "MyEnum");
         }
 
@@ -34,9 +34,9 @@ namespace Creuna.CodeFirstTranslations2.Tests
             var translations = new TranslationClasses("en");
 
             translations
-                .Add(new [] { typeof(Labels), typeof(Messages), typeof(MyEnum) } );
+                .AddRange(new [] { typeof(Labels), typeof(Messages), typeof(MyEnum) } );
 
-            translations.GetTranslationClasses().Select(x => x.Name)
+            translations.ToList().Select(x => x.Name)
                 .Should().BeEquivalentTo("Labels", "Messages", "MyEnum");
         }
 

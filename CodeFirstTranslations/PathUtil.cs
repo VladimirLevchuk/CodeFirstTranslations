@@ -1,10 +1,11 @@
 using System;
 
-namespace Creuna.CodeFirstTranslations2
+namespace CodeFirstTranslations
 {
     public class PathUtil : IPathUtil
     {
         public virtual string PathSeparator => "/";
+
         public virtual string Combine(string path1, string path2)
         {
             if (path1 == null) throw new ArgumentNullException(nameof(path1));
@@ -24,6 +25,11 @@ namespace Creuna.CodeFirstTranslations2
             }
 
             return path1 + path2;
+        }
+
+        public virtual string MakeKey(string path)
+        {
+            return path.ToLowerInvariant();
         }
     }
 }

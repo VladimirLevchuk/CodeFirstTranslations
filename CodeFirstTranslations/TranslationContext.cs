@@ -1,18 +1,7 @@
 ﻿using System;
 
-namespace Creuna.CodeFirstTranslations2
+namespace CodeFirstTranslations
 {
-    public interface IReadOnlyTranslationContext
-    {
-        ITranslationsEnvironment Environment { get; }
-        string CurrentCulture { get; }
-    }
-
-    public interface IWriteOnlyTranslationContext
-    {
-        string CurrentCulture { set; }
-    }
-
     public class TranslationContext
     {
         public static IReadOnlyTranslationContext DefaultContext { get; set; }
