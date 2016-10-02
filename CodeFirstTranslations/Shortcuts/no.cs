@@ -1,6 +1,6 @@
 ﻿namespace CodeFirstTranslations.Shortcuts
 {
-    public class no : Translation
+    public class no : TranslationProperty
     {
         public no(string text) : base(text)
         {

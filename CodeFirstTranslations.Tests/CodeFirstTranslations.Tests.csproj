@@ -57,9 +57,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Performance\PropertyVsFieldPerformanceCompare.cs" />
+    <Compile Include="Performance\TypedPropertyVsFieldPerformaceCompare.cs" />
+    <Compile Include="Quickstart\c.CodeAnnotations.cs" />
+    <Compile Include="Quickstart\d.Shortcuts.cs" />
     <Compile Include="Quickstart\SimpleUsage.cs" />
-    <Compile Include="Quickstart\StringTranslations.cs" />
-    <Compile Include="Quickstart\TypedTranslations.cs" />
+    <Compile Include="Quickstart\b.StringTranslations.cs" />
+    <Compile Include="Quickstart\a.TypedTranslations.cs" />
     <Compile Include="SmokeTests.cs" />
     <Compile Include="TestTranslations.cs" />
     <Compile Include="InitializationTests.cs" />

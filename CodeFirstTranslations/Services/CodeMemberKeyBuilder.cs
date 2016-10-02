@@ -7,7 +7,7 @@ namespace CodeFirstTranslations.Services
         public virtual string BuildMemberKey(ICodeMemberInfo codeMemberInfo)
         {
             if (codeMemberInfo == null) throw new ArgumentNullException(nameof(codeMemberInfo));
-            return codeMemberInfo.ToString();
+            return $"{codeMemberInfo.Type.FullName}->{codeMemberInfo.Name}";
         }
     }
 }

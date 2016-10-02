@@ -6,7 +6,7 @@ namespace CodeFirstTranslations
 {
     public class TranslationClasses : ITranslationClasses
     {
-        protected List<Type> Classes = new List<Type>();
+        protected HashSet<Type> Classes = new HashSet<Type>();
 
         public string DefaultCulture { get; }
 
@@ -28,7 +28,11 @@ namespace CodeFirstTranslations
 
         public virtual ITranslationClasses AddRange(IEnumerable<Type> types)
         {
-            Classes.AddRange(types);
+            foreach (var type in types)
+            {
+                Classes.Add(type);
+            }
+            
             return this;
         }
 

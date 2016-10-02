@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using CodeFirstTranslations.CodeAnnotations;
 using JetBrains.Annotations;
 
-namespace CodeFirstTranslations
+namespace CodeFirstTranslations.Reflection
 {
     public abstract class CodeMemberInfo : ICodeMemberInfo
     {
@@ -26,11 +26,11 @@ namespace CodeFirstTranslations
         [NotNull]
         public virtual string DefaultTypePath => Type.Name;
 
-        public virtual string MemberId => $"{Type.FullName}->{Name}";
+        public string MemberKey => TranslationContext.Current.Environment.CodeMemberKeyBuilder.BuildMemberKey(this);
 
         public override string ToString()
         {
-            return MemberId;
+            return MemberKey;
         }
 
         public virtual List<TAnnotation> GetTypeAnnotations<TAnnotation>()

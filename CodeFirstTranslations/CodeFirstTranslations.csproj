@@ -50,7 +50,11 @@
     <Compile Include="CodeAnnotations\TranslationClassAttribute.cs" />
     <Compile Include="CodeAnnotations\TranslationKeyAttribute.cs" />
     <Compile Include="CodeAnnotations\TranslationPathAttribute.cs" />
+    <Compile Include="Reflection\CodeFieldInfo.cs" />
+    <Compile Include="StringTranslationProperty.cs" />
+    <Compile Include="TranslationField.cs" />
     <Compile Include="TranslationFormat.cs" />
+    <Compile Include="TranslationProperty.cs" />
     <Compile Include="Utils\CodeFirstTranslationsException.cs" />
     <Compile Include="Services\CodeMemberFactory.cs" />
     <Compile Include="Reflection\CodeMemberInfo.cs" />
@@ -81,7 +85,6 @@
     <Compile Include="Shortcuts\TranslationExtensions.cs" />
     <Compile Include="Services\TranslationKeyBuilder.cs" />
     <Compile Include="Services\TranslationKeySpy.cs" />
-    <Compile Include="TranslationWithKey.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

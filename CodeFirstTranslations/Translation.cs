@@ -5,7 +5,7 @@ using JetBrains.Annotations;
 
 namespace CodeFirstTranslations
 {
-    public class Translation
+    public abstract class Translation
     {
         private Dictionary<string, string> _data = new Dictionary<string, string>(StringComparer.InvariantCultureIgnoreCase);
 
@@ -19,17 +19,6 @@ namespace CodeFirstTranslations
             AlternativeKeys = alternativeKeys.OrEmpty().Select(TranslationContext.Current.Environment.PathUtil.MakeKey).ToList();
         }
 
-        public Translation([NotNull] string text, [CanBeNull] IEnumerable<string> alternativeKeys)
-            : this(text, 
-                    TranslationContext.Current.Environment.TranslationKeySpy.DiscoverTranslationKeyFromCallStack(),
-                    alternativeKeys)
-        {}
-
-        public Translation([NotNull] string text)
-            : this(text, TranslationContext.Current.Environment.TranslationKeySpy.DiscoverTranslationKeyFromCallStack())
-        {
-        }
-
         [NotNull]
         public virtual string Value => Translate(TranslationContext.Current);
         [NotNull]
@@ -38,11 +27,6 @@ namespace CodeFirstTranslations
         public virtual List<string> AlternativeKeys { get; }
         [NotNull]
         public virtual string DefaultValue { get; }
-
-        public static implicit operator string(Translation translation)
-        {
-            return translation?.ToString();
-        }
 
         public override string ToString()
         {

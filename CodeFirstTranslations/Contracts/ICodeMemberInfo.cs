@@ -21,7 +21,7 @@ namespace CodeFirstTranslations
         /// </summary>
         string DefaultPropertyPath { get; }
         string DefaultTypePath { get; } 
-        string MemberId { get; }
+        string MemberKey { get; }
 
         List<TAnnotation> GetTypeAnnotations<TAnnotation>();
         List<TAnnotation> GetMemberAnnotations<TAnnotation>();

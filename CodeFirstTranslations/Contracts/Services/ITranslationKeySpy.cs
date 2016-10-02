@@ -2,10 +2,10 @@
 {
     /// <summary>
     /// Translation key spy analyzes call stack 
-    /// to automatically build translatin key
+    /// to automatically generate translation keys
     /// </summary>
     public interface ITranslationKeySpy
     {
-        string DiscoverTranslationKeyFromCallStack();
+        string GenerateTranslationKeyFromCallStack();
     }
 }

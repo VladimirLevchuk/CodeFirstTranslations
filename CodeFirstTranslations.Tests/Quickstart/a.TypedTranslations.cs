@@ -5,32 +5,32 @@ namespace CodeFirstTranslations.Tests.Quickstart
 {
     public class TypedTranslations : TestBase
     {
-        //
         public class Translations
         {
             /// <summary>
-            /// Translation with key/value 
+            /// Translation with key/value. 
+            /// Can be a field, no need in expression syntax 
             /// </summary>
-            public static Translation Hello => new Translation("Hello", key: "/messages/hello");
-            /// <summary>
-            /// Translation with format
-            /// </summary>
-            public static TranslationFormat1 Greeting => new TranslationFormat1("Hello, {0}!", "/messages/greeting");
+            public static Translation Hello = new TranslationField("Hello", key: "/messages/hello");
             /// <summary>
             /// Translation with auto-generated key. 
             /// NOTE: it's important to register translations class to TranslationClasses.Add in order to use auto-generated keys
-            /// NOTE2: it's safe to use simple property
-            /// <code> MyTranslation = new Translation("my", "/my/key") </code>
-            /// when key specified
-            /// while with auto-generated keys you might have to use expression syntax
-            /// <code> MyTranslation => new Translation("my") </code>
-            /// to make sure TranslationClasses initialization ends before Translations type first use
+            /// NOTE2: translation must be a property 
+            /// to be able to auto-generate key 
             /// </summary>
-            public static Translation Bye => new Translation("Bye!");
+            public static Translation Bye => new TranslationProperty("Bye!");
+            /// <summary>
+            /// Or you'll have to provide some extra information
+            /// </summary>
+            public static Translation Ok = new TranslationField<Translations>(nameof(Ok), "OK");
+            /// <summary>
+            /// Translation with format
+            /// </summary>
+            public static TranslationFormat1Field Greeting = new TranslationFormat1Field("Hello, {0}!", "/messages/greeting");
             /// <summary>
             /// Translation with multiple keys (usually needed when we want to use our translation for a 3rd-party library)
             /// </summary>
-            public static Translation LoginRequired => new Translation("Login required!",
+            public static Translation LoginRequired = new TranslationField("Login required!",
                 // our key will be used to generate translation message in our code
                 key: "/errors/loginRequired",
                 // and using alternative keys we'll provide code-first translations for 3rd-parties
@@ -42,7 +42,7 @@ namespace CodeFirstTranslations.Tests.Quickstart
             /// <summary>
             /// Same as above, but with auto-generated key
             /// </summary>
-            public static Translation NameInUse => new Translation("The name you entered is already in use, please choose a different name",
+            public static Translation NameInUse => new TranslationProperty("The name you entered is already in use, please choose a different name",
                 alternativeKeys: new[]
                 {
                     "/library1/errors/userAlreadyExists",

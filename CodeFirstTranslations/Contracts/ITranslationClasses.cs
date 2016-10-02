@@ -5,11 +5,12 @@ namespace CodeFirstTranslations
 {
     /// <summary>
     /// Translation classes registry. 
-    /// User to automatically discover translation keys. 
+    /// User to automatically generate translation keys. 
     /// </summary>
     public interface ITranslationClasses
     {
         ITranslationClasses Add<TTranslationClass>();
+        // ITranslationClasses Add(Type translationClass);
         ITranslationClasses AddRange(IEnumerable<Type> types);
 
         string DefaultCulture { get; }

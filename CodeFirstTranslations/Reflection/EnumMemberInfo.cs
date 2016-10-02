@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace CodeFirstTranslations
+namespace CodeFirstTranslations.Reflection
 {
     public class EnumMemberInfo : CodeMemberInfo
     {

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Reflection;
 using CodeFirstTranslations.CodeAnnotations;
@@ -7,29 +7,29 @@ using JetBrains.Annotations;
 
 namespace CodeFirstTranslations.Reflection
 {
-    public class CodePropertyInfo : CodeMemberInfo
+    public class CodeFieldInfo : CodeMemberInfo
     {
-        [NotNull]
-        public virtual PropertyInfo GetPropertyInfo()
+        public CodeFieldInfo([NotNull] Type type, [NotNull] string name) : base(type, name)
         {
-            var propertyInfo = 
-                Type.GetProperty(Name, BindingFlags.Public | BindingFlags.Static);
-            if (propertyInfo == null)
+        }
+
+        [NotNull]
+        public virtual FieldInfo GetFieldInfo()
+        {
+            var fieldInfo =
+                Type.GetField(Name, BindingFlags.Public | BindingFlags.Static);
+            if (fieldInfo == null)
             {
                 throw new CodeFirstTranslationsException(
                     ErrorMessages.TranslationPropertyNotFound.Format(Type.FullName, Type.Name));
             }
 
-            return propertyInfo;
-        }
-
-        public CodePropertyInfo(Type type, string name) : base(type, name)
-        {
+            return fieldInfo;
         }
 
         public override List<TAnnotation> GetMemberAnnotations<TAnnotation>()
         {
-            return GetPropertyInfo().GetAnnotations<TAnnotation>();
+            return GetFieldInfo().GetAnnotations<TAnnotation>();
         }
     }
 }
