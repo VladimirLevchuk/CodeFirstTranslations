@@ -15,14 +15,12 @@ namespace CodeFirstTranslations.Tests.Quickstart
             /// <summary>
             /// Translation with auto-generated key. 
             /// NOTE: it's important to register translations class to TranslationClasses.Add in order to use auto-generated keys
-            /// NOTE2: translation must be a property 
-            /// to be able to auto-generate key 
             /// </summary>
-            public static Translation Bye => new TranslationProperty("Bye!");
+            public static Translation Bye = new TranslationProperty("Bye!");
             /// <summary>
             /// Or you'll have to provide some extra information
             /// </summary>
-            public static Translation Ok = new TranslationField<Translations>(nameof(Ok), "OK");
+            public static Translation Ok = new TranslationField(nameof(Ok), "OK");
             /// <summary>
             /// Translation with format
             /// </summary>
