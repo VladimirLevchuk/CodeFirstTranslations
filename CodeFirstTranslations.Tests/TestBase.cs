@@ -1,3 +1,4 @@
+using CodeFirstTranslations.Reflection;
 using CodeFirstTranslations.Services;
 using NUnit.Framework;
 
@@ -21,7 +22,7 @@ namespace CodeFirstTranslations.Tests
         public ICodeMemberInfoFactory CodeMemberInfoFactory { get; set; } = new CodeMemberFactory();
         public ITranslationKeySpy TranslationKeySpy { get; set; } 
         public ITranslationService TranslationService { get; set; } = new ReturnFallbackTransationService();
-        public ITranslationClasses TranslationClasses { get; set; } = new TranslationClasses(TestDefaultCulture);
+        public ITranslationTypesRegistry TranslationTypesRegistry { get; set; } = new TranslationTypesRegistry(TestDefaultCulture);
         public ITranslationKeyBuilder TranslationKeyBuilder { get; set; } = new TranslationKeyBuilder();
         public ICodeMemberKeyBuilder CodeMemberKeyBuilder { get; set; } = new CodeMemberKeyBuilder();
         

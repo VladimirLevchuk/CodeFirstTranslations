@@ -1,4 +1,4 @@
-namespace CodeFirstTranslations
+namespace CodeFirstTranslations.Services
 {
     /// <summary>
     /// Translation services is reponsible for translating strings by key. 

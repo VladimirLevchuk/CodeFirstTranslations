@@ -1,6 +1,6 @@
 using System;
 
-namespace CodeFirstTranslations
+namespace CodeFirstTranslations.Services
 {
     public class PathUtil : IPathUtil
     {

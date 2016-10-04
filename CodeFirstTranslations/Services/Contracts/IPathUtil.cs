@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace CodeFirstTranslations
+namespace CodeFirstTranslations.Services
 {
     /// <summary>
     /// Path util

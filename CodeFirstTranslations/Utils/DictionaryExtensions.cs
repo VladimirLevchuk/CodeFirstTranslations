@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using JetBrains.Annotations;
 
-namespace CodeFirstTranslations
+namespace CodeFirstTranslations.Utils
 {
     public static class DictionaryExtensions
     {

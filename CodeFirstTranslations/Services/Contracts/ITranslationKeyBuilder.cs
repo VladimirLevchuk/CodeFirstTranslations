@@ -1,6 +1,8 @@
-﻿using JetBrains.Annotations;
+﻿using System;
+using CodeFirstTranslations.Reflection;
+using JetBrains.Annotations;
 
-namespace CodeFirstTranslations
+namespace CodeFirstTranslations.Services
 {
     public interface ITranslationKeyBuilder
     {
@@ -11,5 +13,9 @@ namespace CodeFirstTranslations
         /// <returns></returns>
         [NotNull]
         string BuildTranslationKey([NotNull] ICodeMemberInfo codeMember);
+        [NotNull]
+        string GetTranslationTypePath([NotNull] Type type);
+        [NotNull]
+        string GetTranslationMemberPath([NotNull] ICodeMemberInfo codeMember);
     }
 }

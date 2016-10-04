@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 
-namespace CodeFirstTranslations
+namespace CodeFirstTranslations.Reflection
 {
     /// <summary>
     /// Information about code member
@@ -11,19 +12,20 @@ namespace CodeFirstTranslations
         /// <summary>
         /// Type where member is present
         /// </summary>
+        [NotNull]
         Type Type { get; }
         /// <summary>
         /// Member name
         /// </summary>
+        [NotNull]
         string Name { get; }
-        /// <summary>
-        /// 
-        /// </summary>
+
+        [NotNull]
         string DefaultPropertyPath { get; }
-        string DefaultTypePath { get; } 
+        [NotNull]
         string MemberKey { get; }
 
-        List<TAnnotation> GetTypeAnnotations<TAnnotation>();
+        [NotNull]
         List<TAnnotation> GetMemberAnnotations<TAnnotation>();
     }
 }

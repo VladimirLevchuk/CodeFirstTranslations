@@ -1,6 +1,7 @@
-﻿using JetBrains.Annotations;
+﻿using CodeFirstTranslations.Reflection;
+using JetBrains.Annotations;
 
-namespace CodeFirstTranslations
+namespace CodeFirstTranslations.Services
 {
     /// <summary>
     /// Build code member key
@@ -8,6 +9,7 @@ namespace CodeFirstTranslations
     /// </summary>
     public interface ICodeMemberKeyBuilder
     {
+        [NotNull]
         string BuildMemberKey([NotNull] ICodeMemberInfo codeMemberInfo);
     }
 }

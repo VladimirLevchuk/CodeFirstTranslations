@@ -8,7 +8,7 @@ namespace CodeFirstTranslations.Tests.Quickstart
         [Test]
         public void TwoCultures()
         {
-            TranslationContext.Environment.TranslationClasses
+            TranslationContext.Environment.TranslationTypesRegistry
                 .Add<Messages>();
 
             TranslationContext.CurrentCulture = "en";

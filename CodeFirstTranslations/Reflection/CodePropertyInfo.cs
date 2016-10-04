@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reflection;
-using CodeFirstTranslations.CodeAnnotations;
 using CodeFirstTranslations.Translations;
+using CodeFirstTranslations.Utils;
 using JetBrains.Annotations;
 
 namespace CodeFirstTranslations.Reflection
@@ -17,19 +16,18 @@ namespace CodeFirstTranslations.Reflection
             if (propertyInfo == null)
             {
                 throw new CodeFirstTranslationsException(
-                    ErrorMessages.TranslationPropertyNotFound.Format(Type.FullName, Type.Name));
+                    ErrorMessages.TranslationMemberNotFound.Format(Type.FullName, Type.Name));
             }
 
             return propertyInfo;
         }
 
-        public CodePropertyInfo(Type type, string name) : base(type, name)
+        public CodePropertyInfo([NotNull] Type type, [NotNull] string name) : base(type, name)
         {
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (name == null) throw new ArgumentNullException(nameof(name));
         }
 
-        public override List<TAnnotation> GetMemberAnnotations<TAnnotation>()
-        {
-            return GetPropertyInfo().GetAnnotations<TAnnotation>();
-        }
+        public override MemberInfo MemberInfo => GetPropertyInfo();
     }
 }

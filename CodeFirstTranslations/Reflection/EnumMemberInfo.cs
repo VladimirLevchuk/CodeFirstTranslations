@@ -1,18 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
+using JetBrains.Annotations;
 
 namespace CodeFirstTranslations.Reflection
 {
     public class EnumMemberInfo : CodeMemberInfo
     {
-        public EnumMemberInfo(Type type, string name) : base(type, name)
+        public EnumMemberInfo([NotNull] Type type, [NotNull] string name) : base(type, name)
         {
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (name == null) throw new ArgumentNullException(nameof(name));
         }
 
-        public override List<TAnnotation> GetMemberAnnotations<TAnnotation>()
+        public override MemberInfo MemberInfo
         {
-            // TODO [high] implement EnumMemberInfo.GetMemberAnnotations
-            throw new NotImplementedException();
+            get
+            {
+                // TODO [high] implement EnumMemberInfo.MemberInfo
+                throw new NotImplementedException();
+            }
         }
     }
 }

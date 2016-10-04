@@ -4,9 +4,9 @@ namespace CodeFirstTranslations.Tests.Performance
 {
     public class TypedPropertyVsFieldPerformaceCompare : PerformanceTestBase
     {
-        protected override void SetupTranslations(ITranslationClasses translationClasses)
+        protected override void SetupTranslations(ITranslationTypesRegistry translationTypesRegistry)
         {
-            TranslationsEnvironment.TranslationClasses.Add<Translations>();
+            TranslationsEnvironment.TranslationTypesRegistry.Add<Translations>();
         }
 
         public class Translations

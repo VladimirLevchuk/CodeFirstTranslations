@@ -1,4 +1,4 @@
-﻿namespace CodeFirstTranslations
+﻿namespace CodeFirstTranslations.Services
 {
     /// <summary>
     /// Translation key spy analyzes call stack 

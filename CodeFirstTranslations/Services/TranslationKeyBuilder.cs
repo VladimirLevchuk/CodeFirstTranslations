@@ -1,10 +1,22 @@
+using System;
+using CodeFirstTranslations.Reflection;
+
 namespace CodeFirstTranslations.Services
 {
-    public class TranslationKeyBuilder : ITranslationKeyBuilder
+    public class TranslationKeyBuilder : TranslationKeyBuilderBase
     {
-        public virtual string BuildTranslationKey(ICodeMemberInfo codeMember)
+        public TranslationKeyBuilder(IPathUtil pathUtil) : base(pathUtil)
         {
-            return $"/{codeMember.Type.Name}/{codeMember.Name}".ToLowerInvariant();
+        }
+
+        public override string GetTranslationTypePath(Type type)
+        {
+            return type.Name;
+        }
+
+        public override string GetTranslationMemberPath(ICodeMemberInfo codeMember)
+        {
+            return codeMember.Name;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace CodeFirstTranslations.Tests
         [Test]
         public void DefaultCutlure()
         {
-            var translations = new TranslationClasses("en");
+            var translations = new TranslationTypesRegistry("en");
 
             translations.DefaultCulture.Should().Be("en");
         }
@@ -17,7 +17,7 @@ namespace CodeFirstTranslations.Tests
         [Test]
         public void FluentEnumerating()
         {
-            var translations = new TranslationClasses("en");
+            var translations = new TranslationTypesRegistry("en");
 
             translations
                 .Add<Labels>()
@@ -31,7 +31,7 @@ namespace CodeFirstTranslations.Tests
         [Test]
         public void Enumerating()
         {
-            var translations = new TranslationClasses("en");
+            var translations = new TranslationTypesRegistry("en");
 
             translations
                 .AddRange(new [] { typeof(Labels), typeof(Messages), typeof(MyEnum) } );

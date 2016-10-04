@@ -1,7 +1,8 @@
 using System;
 using System.Runtime.Serialization;
+using JetBrains.Annotations;
 
-namespace CodeFirstTranslations
+namespace CodeFirstTranslations.Utils
 {
     [Serializable]
     public class CodeFirstTranslationsException : Exception
@@ -17,11 +18,11 @@ namespace CodeFirstTranslations
         {
         }
 
-        public CodeFirstTranslationsException(string message) : base(message)
+        public CodeFirstTranslationsException([LocalizationRequired] string message) : base(message)
         {
         }
 
-        public CodeFirstTranslationsException(string message, Exception inner) : base(message, inner)
+        public CodeFirstTranslationsException([LocalizationRequired] string message, Exception inner) : base(message, inner)
         {
         }
 

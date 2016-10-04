@@ -10,12 +10,12 @@ namespace CodeFirstTranslations.Tests.Performance
         public override void Setup()
         {
             base.Setup();
-            SetupTranslations(TranslationsEnvironment.TranslationClasses);
+            SetupTranslations(TranslationsEnvironment.TranslationTypesRegistry);
             this.Stopwatch = new Stopwatch();
             Stopwatch.Start();
         }
 
-        protected abstract void SetupTranslations(ITranslationClasses translationClasses);
+        protected abstract void SetupTranslations(ITranslationTypesRegistry translationTypesRegistry);
 
         public Stopwatch Stopwatch { get; set; }
 
@@ -40,9 +40,9 @@ namespace CodeFirstTranslations.Tests.Performance
         /// </summary>
         // const int NumberOfTranslations = 1000; // 0.018 vs 0.013 sec
 
-        protected override void SetupTranslations(ITranslationClasses translationClasses)
+        protected override void SetupTranslations(ITranslationTypesRegistry translationTypesRegistry)
         {
-            TranslationsEnvironment.TranslationClasses.Add<Translations>();
+            TranslationsEnvironment.TranslationTypesRegistry.Add<Translations>();
         }
 
         public class Translations

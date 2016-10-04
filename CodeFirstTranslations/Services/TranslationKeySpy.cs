@@ -2,7 +2,9 @@
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
+using CodeFirstTranslations.Reflection;
 using CodeFirstTranslations.Translations;
+using CodeFirstTranslations.Utils;
 
 namespace CodeFirstTranslations.Services
 {
@@ -17,11 +19,11 @@ namespace CodeFirstTranslations.Services
 
         protected ITranslationsEnvironment Environment => TranslationContext.Current.Environment;
 
-        private string KeyFromMethod(MethodBase method, ITranslationClasses translationClasses)
+        private string KeyFromMethod(MethodBase method, ITranslationTypesRegistry translationTypesRegistry)
         {
             const string prefix = "get_";
 
-            if (method.Name.StartsWith(prefix) && translationClasses.Contains(method.DeclaringType))
+            if (method.Name.StartsWith(prefix) && translationTypesRegistry.Contains(method.DeclaringType))
             {
                 var propertName = method.Name.Substring(prefix.Length);
                 var codeProperty = CodeMemberInfoFactory.Create(method.DeclaringType, propertName);
@@ -34,7 +36,7 @@ namespace CodeFirstTranslations.Services
 
         public virtual string GenerateTranslationKeyFromCallStack()
         {
-            var translationClasses = Environment.TranslationClasses;
+            var translationClasses = Environment.TranslationTypesRegistry;
             var key = KeyFromMethod(new StackFrame(2).GetMethod(), translationClasses)
                 ?? KeyFromMethod(new StackFrame(3).GetMethod(), translationClasses)
                 ?? KeyFromMethod(new StackFrame(4).GetMethod(), translationClasses)

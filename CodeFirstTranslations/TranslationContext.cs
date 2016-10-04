@@ -1,4 +1,7 @@
 ﻿using System;
+using CodeFirstTranslations.Translations;
+using CodeFirstTranslations.Utils;
+using JetBrains.Annotations;
 
 namespace CodeFirstTranslations
 {
@@ -6,6 +9,19 @@ namespace CodeFirstTranslations
     {
         public static IReadOnlyTranslationContext DefaultContext { get; set; }
         public static Func<IReadOnlyTranslationContext> ContextAccessor = () => DefaultContext;
-        public static IReadOnlyTranslationContext Current => ContextAccessor();
+
+        [NotNull]
+        public static IReadOnlyTranslationContext Current
+        {
+            get
+            {
+                var result = ContextAccessor?.Invoke();
+                if (result == null)
+                {
+                    throw new CodeFirstTranslationsException(ErrorMessages.NoContext.ToString());
+                }
+                return result;
+            }
+        }
     }
 }

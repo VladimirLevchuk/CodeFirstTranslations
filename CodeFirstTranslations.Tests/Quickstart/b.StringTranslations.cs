@@ -19,7 +19,7 @@ namespace CodeFirstTranslations.Tests.Quickstart
         {
             base.Setup();
 
-            TranslationsEnvironment.TranslationClasses.AddRange(new []{typeof(Translations)});
+            TranslationsEnvironment.TranslationTypesRegistry.AddRange(new []{typeof(Translations)});
         }
 
         [Test]

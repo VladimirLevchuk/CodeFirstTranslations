@@ -8,7 +8,7 @@ namespace CodeFirstTranslations.Tests
         [Test]
         public void KeyFromCallStack()
         {
-            TranslationContext.Environment.TranslationClasses
+            TranslationContext.Environment.TranslationTypesRegistry
                 .Add<Labels>();
 
             TranslationsEnvironment.TranslationService = new ReturnKeyTransationService();

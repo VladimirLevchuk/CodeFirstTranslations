@@ -6,7 +6,7 @@ using NUnit.Framework;
 
 namespace CodeFirstTranslations.Tests.Quickstart
 {
-    public class Shortcuts
+    public class Shortcuts : TestBase
     {
         public class T : StringTranslationProperty
         {
@@ -30,7 +30,7 @@ namespace CodeFirstTranslations.Tests.Quickstart
             }
         }
 
-        public class Translations : TestBase
+        public class Translations 
         {
             public static string First => new T("My first translation");
             public static Translation Second = new T("My second translation");
@@ -42,6 +42,48 @@ namespace CodeFirstTranslations.Tests.Quickstart
         [Test]
         public void Sample()
         {
+            TranslationsEnvironment.TranslationTypesRegistry.AddEnum<My, MyTanslations1>("/");
+            TranslationsEnvironment.TranslationTypesRegistry.AddEnum<My, MyTanslations2>();
+            EnumTranslations.Translate(My.One);
+            EnumTranslations.Translate<MyTanslations2>(My.One);
+            Translations.WithTwoParameters.Format("one", "two").Should().Be("Format with two parameters: one and two");
+            Translations.Second.Key.Should().Be("/translations/second");
+        }
+    }
+
+    public class Enums : TestBase
+    {
+        public enum MyEnum
+        {
+            One, Two, Three
+        }
+
+        public enum RoomPreference
+        {
+            None = 0,
+            Smoking,
+            NonSmoking
+        }
+
+        public class MyEnumTanslations1
+        {
+            public static Translation One => new TranslationProperty("One");
+            public static Translation Two => new TranslationProperty("Two");
+            public static Translation Three => new TranslationProperty("Three");
+        }
+
+        public class RoomPreferenceTranslations
+        {
+            public static Translation None = new 
+        }
+
+        [Test]
+        public void Sample()
+        {
+            TranslationsEnvironment.TranslationTypesRegistry.AddEnum<My, MyTanslations1>();
+            
+            EnumTranslations.Translate(My.One);
+            EnumTranslations.Translate<MyTanslations2>(My.One);
             Translations.WithTwoParameters.Format("one", "two").Should().Be("Format with two parameters: one and two");
             Translations.Second.Key.Should().Be("/translations/second");
         }

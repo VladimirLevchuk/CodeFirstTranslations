@@ -2,7 +2,7 @@
 using System.Linq;
 using JetBrains.Annotations;
 
-namespace CodeFirstTranslations
+namespace CodeFirstTranslations.Utils
 {
     public static class EnumerableExtensions
     {
