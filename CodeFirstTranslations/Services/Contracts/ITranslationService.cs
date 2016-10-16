@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+
 namespace CodeFirstTranslations.Services
 {
     /// <summary>
@@ -13,6 +15,7 @@ namespace CodeFirstTranslations.Services
         /// <param name="key"></param>
         /// <param name="fallback"></param>
         /// <returns></returns>
-        string Translate(string key, string fallback);
+        [CanBeNull]
+        string Translate([NotNull] string key, [CanBeNull] string fallback);
     }
 }

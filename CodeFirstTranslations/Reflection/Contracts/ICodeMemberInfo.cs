@@ -27,5 +27,14 @@ namespace CodeFirstTranslations.Reflection
 
         [NotNull]
         List<TAnnotation> GetMemberAnnotations<TAnnotation>();
+
+        [CanBeNull]
+        object GetValue();
+        [NotNull]
+        string GetKey();
+        [CanBeNull]
+        string TryGetKey();
+
+        void TrySetKey([NotNull] string key);
     }
 }

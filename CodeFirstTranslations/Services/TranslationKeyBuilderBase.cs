@@ -1,24 +1,27 @@
 using System;
 using CodeFirstTranslations.Reflection;
+using JetBrains.Annotations;
 
 namespace CodeFirstTranslations.Services
 {
-    public abstract class TranslationKeyBuilderBase : ITranslationKeyBuilder
+    public abstract class TranslationKeyBuilderBase : ITranslationKeyGenerator
     {
+        [NotNull]
         protected IPathUtil PathUtil { get; }
 
-        protected TranslationKeyBuilderBase(IPathUtil pathUtil)
+        protected TranslationKeyBuilderBase([NotNull] IPathUtil pathUtil)
         {
+            if (pathUtil == null) throw new ArgumentNullException(nameof(pathUtil));
             PathUtil = pathUtil;
         }
 
-        public virtual string BuildTranslationKey(ICodeMemberInfo codeMember)
+        public virtual string GenerateTranslationKey(ICodeMemberInfo codeMember)
         {
-            return PathUtil.Combine(GetTranslationTypePath(codeMember.Type), GetTranslationMemberPath(codeMember));
+            return PathUtil.Combine(GenerateTranslationTypePath(codeMember.Type), GenerateTranslationMemberPath(codeMember));
         }
 
-        public abstract string GetTranslationTypePath(Type type);
+        public abstract string GenerateTranslationTypePath(Type type);
 
-        public abstract string GetTranslationMemberPath(ICodeMemberInfo codeMember);
+        public abstract string GenerateTranslationMemberPath(ICodeMemberInfo codeMember);
     }
 }

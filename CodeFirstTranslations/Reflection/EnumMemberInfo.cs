@@ -13,6 +13,11 @@ namespace CodeFirstTranslations.Reflection
             if (name == null) throw new ArgumentNullException(nameof(name));
         }
 
+        protected override ITranslation TryGetTranslation()
+        {
+            throw new NotImplementedException();
+        }
+
         public override MemberInfo MemberInfo
         {
             get

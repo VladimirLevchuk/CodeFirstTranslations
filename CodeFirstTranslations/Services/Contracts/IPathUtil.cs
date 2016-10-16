@@ -13,6 +13,10 @@ namespace CodeFirstTranslations.Services
         /// </summary>
         [NotNull]
         string PathSeparator { get; }
+
+        [NotNull]
+        string Root { get; }
+
         /// <summary>
         /// Combines 2 path segments using PathSeparator
         /// </summary>

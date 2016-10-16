@@ -1,4 +1,6 @@
-﻿namespace CodeFirstTranslations.Services
+﻿using JetBrains.Annotations;
+
+namespace CodeFirstTranslations.Services
 {
     /// <summary>
     /// Translation key spy analyzes call stack 
@@ -6,6 +8,7 @@
     /// </summary>
     public interface ITranslationKeySpy
     {
+        [NotNull]
         string GenerateTranslationKeyFromCallStack();
     }
 }

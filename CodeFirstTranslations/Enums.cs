@@ -1,22 +1,35 @@
 ﻿using System;
+using CodeFirstTranslations.Services;
+using JetBrains.Annotations;
 
 namespace CodeFirstTranslations
 {
     public static class Enums
     {
-        public static string Translate(Enum enumValue)
+        private static IEnumTranslationService EnumTranslationService => TranslationContext.Current.Environment.EnumTranslationService;
+
+        [CanBeNull]
+        public static string Translate([NotNull] Enum enumValue)
         {
-            return TranslationContext.Current.Environment.EnumTranslationService.Translate(enumValue);
+            if (enumValue == null) throw new ArgumentNullException(nameof(enumValue));
+            return EnumTranslationService.Translate(enumValue);
+        }
+        
+        [CanBeNull]
+        public static string Translate([NotNull] Type translationsType, [NotNull] Enum enumValue)
+        {
+            if (translationsType == null) throw new ArgumentNullException(nameof(translationsType));
+            if (enumValue == null) throw new ArgumentNullException(nameof(enumValue));
+
+            return EnumTranslationService.Translate(translationsType, enumValue);
         }
 
-        public static string Translate(Type translationsType, Enum enumValue)
+        [CanBeNull]
+        public static string Translate<TTranslations>([NotNull] Enum enumValue)
         {
-            return TranslationContext.Current.Environment.EnumTranslationService.Translate(translationsType, enumValue);
-        }
+            if (enumValue == null) throw new ArgumentNullException(nameof(enumValue));
 
-        public static string Translate<TTranslations>(Enum enumValue)
-        {
-            return TranslationContext.Current.Environment.EnumTranslationService.Translate<TTranslations>(enumValue);
+            return EnumTranslationService.Translate<TTranslations>(enumValue);
         }
     }
 }

@@ -7,7 +7,8 @@ namespace CodeFirstTranslations
 {
     public class StringTranslationProperty : TranslationProperty
     {
-        public StringTranslationProperty([NotNull] string text, [CanBeNull] IEnumerable<string> alternativeKeys) : base(text, alternativeKeys)
+        public StringTranslationProperty([NotNull] string text, [CanBeNull] IEnumerable<string> alternativeKeys) 
+            : base(text, alternativeKeys)
         {
         }
 
@@ -28,7 +29,7 @@ namespace CodeFirstTranslations
             var codeMemberInfo = TranslationContext.Current.Environment.CodeMemberInfoFactory.Create(
                 translationType, memberName);
 
-            var key = TranslationContext.Current.Environment.TranslationKeyBuilder.BuildTranslationKey(codeMemberInfo);
+            var key = TranslationContext.Current.Environment.TranslationKeyBuilder.GenerateTranslationKey(codeMemberInfo);
             return key;
         }
 

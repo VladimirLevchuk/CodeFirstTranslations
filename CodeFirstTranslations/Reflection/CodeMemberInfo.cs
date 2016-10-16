@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Reflection;
 using CodeFirstTranslations.CodeAnnotations;
+using CodeFirstTranslations.Translations;
+using CodeFirstTranslations.Utils;
 using JetBrains.Annotations;
 
 namespace CodeFirstTranslations.Reflection
@@ -37,6 +39,44 @@ namespace CodeFirstTranslations.Reflection
         {
             return MemberInfo.GetAnnotations<TAnnotation>();
         }
+
+        [CanBeNull]
+        protected abstract ITranslation TryGetTranslation();
+
+        [CanBeNull]
+        public virtual object GetValue()
+        {
+            var result = TryGetTranslation()?.Value;
+            return result;
+        }
+
+        [NotNull]
+        public virtual string GetKey()
+        {
+            var result = TryGetKey();
+            if (result == null)
+            {
+                throw new CodeFirstTranslationsException(ErrorMessages.UnableToGetKeyForMember.Format(this));
+            }
+            return result;
+        }
+
+        [CanBeNull]
+        public string TryGetKey()
+        {
+            var result = TryGetTranslation()?.TryGetKey();
+            return result;
+        }
+
+        public void TrySetKey(string key)
+        {
+            var translation = TryGetTranslation();
+            if (translation != null)
+            {
+                translation.Key = key;
+            }
+        }
+
         [NotNull]
         public abstract MemberInfo MemberInfo { get; }
     }

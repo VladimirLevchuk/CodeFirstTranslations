@@ -15,14 +15,15 @@ namespace CodeFirstTranslations
         {
             var env = TranslationContext.Current.Environment;
             var info = env.CodeMemberInfoFactory.Create(typeof(TTranslation), fieldName);
-            var key = env.TranslationKeyBuilder.BuildTranslationKey(info);
+            var key = env.TranslationKeyBuilder.GenerateTranslationKey(info);
             return key;
         }
     }
 
     public class TranslationField : Translation
     {
-        public TranslationField([NotNull] string text, [NotNull] string key, [CanBeNull] IEnumerable<string> alternativeKeys = null) : base(text, key, alternativeKeys)
+        public TranslationField([NotNull] string text, [CanBeNull] string key = null, 
+            [CanBeNull] IEnumerable<string> alternativeKeys = null) : base(text, key, alternativeKeys)
         {
         }
     }

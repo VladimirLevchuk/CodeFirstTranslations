@@ -28,6 +28,11 @@ namespace CodeFirstTranslations.Reflection
             if (name == null) throw new ArgumentNullException(nameof(name));
         }
 
+        protected override ITranslation TryGetTranslation()
+        {
+            return GetPropertyInfo().GetValue(null) as ITranslation;
+        }
+
         public override MemberInfo MemberInfo => GetPropertyInfo();
     }
 }

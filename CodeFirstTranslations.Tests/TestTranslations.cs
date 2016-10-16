@@ -3,14 +3,9 @@ using CodeFirstTranslations.Shortcuts;
 
 namespace CodeFirstTranslations.Tests
 {
-    [TranslationClass(Path = "/my/labels")]
-    public partial class Labels
+    public class Labels
     {
         public static string Label1 => new StringTranslationProperty("");
-
-        [TranslationClass(Path = "/my/labels/nested")]
-        public static class NestedLabels
-        { }
     }
 
     public class Messages

@@ -5,6 +5,7 @@ namespace CodeFirstTranslations.Services
     public class PathUtil : IPathUtil
     {
         public virtual string PathSeparator => "/";
+        public virtual string Root => "/";
 
         public virtual string Combine(string path1, string path2)
         {
@@ -24,11 +25,12 @@ namespace CodeFirstTranslations.Services
                 return path1 + PathSeparator + path2;
             }
 
-            return path1 + path2;
+            return MakeKey(path1 + path2);
         }
 
         public virtual string MakeKey(string path)
         {
+            if (path == null) throw new ArgumentNullException(nameof(path));
             return path.ToLowerInvariant();
         }
     }

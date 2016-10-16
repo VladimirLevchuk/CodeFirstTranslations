@@ -26,6 +26,20 @@ namespace CodeFirstTranslations.Reflection
             return fieldInfo;
         }
 
+        protected override ITranslation TryGetTranslation()
+        {
+            try
+            {
+                return GetFieldInfo().GetValue(null) as ITranslation;
+            }
+            catch (Exception)
+            {
+                Console.WriteLine($"Type: {Type}.{Name}");
+                return null;
+            }
+            
+        }
+
         public override MemberInfo MemberInfo => GetFieldInfo();
     }
 }

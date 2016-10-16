@@ -45,7 +45,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CodeAnnotations\AnnotationExtensions.cs" />
+    <Compile Include="Services\Contracts\ITranslationKeyInitializer.cs" />
     <Compile Include="Enums.cs" />
+    <Compile Include="Services\TranslationKeyInitializer.cs" />
     <Compile Include="Services\EnumTranslationService.cs" />
     <Compile Include="Services\Contracts\IEnumTranslationService.cs" />
     <Compile Include="Contracts\TranslationTypePathInfo.cs" />
@@ -71,7 +73,7 @@
     <Compile Include="Services\Contracts\IPathUtil.cs" />
     <Compile Include="Contracts\IReadOnlyTranslationContext.cs" />
     <Compile Include="Contracts\ITranslationTypesRegistry.cs" />
-    <Compile Include="Services\Contracts\ITranslationKeyBuilder.cs" />
+    <Compile Include="Services\Contracts\ITranslationKeyGenerator.cs" />
     <Compile Include="Services\Contracts\ITranslationKeySpy.cs" />
     <Compile Include="Contracts\ITranslationsEnvironment.cs" />
     <Compile Include="Services\Contracts\ITranslationService.cs" />
@@ -82,7 +84,7 @@
     <Compile Include="TranslationTypesRegistry.cs" />
     <Compile Include="TranslationContext.cs" />
     <Compile Include="Shortcuts\TranslationExtensions.cs" />
-    <Compile Include="Services\TranslationKeyBuilder.cs" />
+    <Compile Include="Services\TranslationKeyGenerator.cs" />
     <Compile Include="Services\TranslationKeySpy.cs" />
   </ItemGroup>
   <ItemGroup>

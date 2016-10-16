@@ -10,15 +10,19 @@ namespace CodeFirstTranslations
 {
     public class TranslationTypesRegistry : ITranslationTypesRegistry
     {
-        public TranslationTypesRegistry(string defaultCulture, ITranslationKeyBuilder translationKeyBuilder)
+        public TranslationTypesRegistry(string defaultCulture, [NotNull] ITranslationKeyGenerator translationKeyBuilder)
         {
+            if (translationKeyBuilder == null) throw new ArgumentNullException(nameof(translationKeyBuilder));
             DefaultCulture = defaultCulture;
             TranslationKeyBuilder = translationKeyBuilder;
         }
 
-        protected ITranslationKeyBuilder TranslationKeyBuilder { get; }
-
+        [NotNull]
+        protected ITranslationKeyGenerator TranslationKeyBuilder { get; }
+        [NotNull]
         protected Dictionary<Type, string> Types { get; }  = new Dictionary<Type, string>();
+        [NotNull]
+        protected Dictionary<Type, Type> EnumTranslationTypes { get; } = new Dictionary<Type, Type>();
 
         public string DefaultCulture { get; }
 
@@ -46,13 +50,18 @@ namespace CodeFirstTranslations
             var path = GetOrGenerateClassPath(translationsType, classPath);
             Types.Add(translationsType, path);
             Types.Add(enumType, path);
+            if (!EnumTranslationTypes.ContainsKey(enumType))
+            {
+                EnumTranslationTypes.Add(enumType, translationsType);
+            }
+
             return this;
         }
 
         protected virtual string GetOrGenerateClassPath([NotNull] Type translationsType, [CanBeNull] string classPath)
         {
             if (translationsType == null) throw new ArgumentNullException(nameof(translationsType));
-            return classPath ?? TranslationKeyBuilder.GetTranslationTypePath(translationsType);
+            return classPath ?? TranslationKeyBuilder.GenerateTranslationTypePath(translationsType);
         }
 
         public virtual ITranslationTypesRegistry AddRange([NotNull] IEnumerable<TranslationTypeInfo> typeInfos)
@@ -60,7 +69,8 @@ namespace CodeFirstTranslations
             if (typeInfos == null) throw new ArgumentNullException(nameof(typeInfos));
             foreach (var typeInfo in typeInfos)
             {
-                Add(typeInfo.Type, typeInfo.Path);
+                if (typeInfo != null)
+                    Add(typeInfo.Type, typeInfo.Path);
             }
             return this;
         }
@@ -70,7 +80,8 @@ namespace CodeFirstTranslations
             if (types == null) throw new ArgumentNullException(nameof(types));
             foreach (var type in types)
             {
-                Add(type);
+                if (type != null)
+                    Add(type);
             }
             
             return this;
@@ -96,6 +107,18 @@ namespace CodeFirstTranslations
             {
                 throw new CodeFirstTranslationsException(ErrorMessages.TranslationsTypeNotFound.Format(translationsType));
             }
+            return result;
+        }
+
+        public virtual Type GetEnumTranslationsType(Type enumType)
+        {
+            if (enumType == null) throw new ArgumentNullException(nameof(enumType));
+            var result = EnumTranslationTypes.TryGetValue(enumType);
+            if (result == null)
+            {
+                throw new CodeFirstTranslationsException(ErrorMessages.UnableToFindTranslationsTypeForEnum.Format(enumType));
+            }
+
             return result;
         }
 

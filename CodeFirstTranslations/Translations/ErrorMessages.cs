@@ -28,5 +28,16 @@ namespace CodeFirstTranslations.Translations
         [NotNull]
         public static Translation NoContext = new TranslationField("No translation context found. Translations configuration is incorrect. ",
             $"{KeyPrefix}/{nameof(NoContext)}");
+
+        [NotNull]
+        public static TranslationFormat1Field UnableToGetKeyForMember = new TranslationFormat1Field("Unable to get translaton key for code member '{0}'",
+            $"{KeyPrefix}/{nameof(UnableToGetKeyForMember)}");
+
+        [NotNull]
+        public static TranslationFormat1Field UnableToFindTranslationsTypeForEnum = new TranslationFormat1Field("Unable to find translations type for enum '{0}'",
+            $"{KeyPrefix}/{nameof(UnableToFindTranslationsTypeForEnum)}");
+
+        public static TranslationFormat1Field EnumExpected = new TranslationFormat1Field("Enum expected, but value of type '{0}' passed", 
+            $"{KeyPrefix}/{nameof(EnumExpected)}");
     }
 }

@@ -31,9 +31,9 @@ namespace CodeFirstTranslations.Tests.Performance
     {
         // const int NumberOfTranslations = 1000000; // 12.677 vs 0.091 
 
-        const int NumberOfTranslations = 100000; // 1.342 vs 0.021 sec
+        // const int NumberOfTranslations = 100000; // 1.342 vs 0.021 sec
 
-        // const int NumberOfTranslations = 10000; // 0.137 vs 0.014 sec
+        const int NumberOfTranslations = 10000; // 0.137 vs 0.014 sec
 
         /// <summary>
         /// For 1000 translations performance is almost equal

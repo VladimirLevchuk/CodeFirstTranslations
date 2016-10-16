@@ -7,27 +7,31 @@ namespace CodeFirstTranslations.Tests
     public class TestTranslationContext : IReadOnlyTranslationContext
     {
         public ITranslationsEnvironment Environment { get; } = new TestTranslationsEnvironment();
-        public string CurrentCulture { get; set; }
+        public string CurrentCulture { get; set; } = "en";
     }
 
     public class TestTranslationsEnvironment : ITranslationsEnvironment
     {
         public TestTranslationsEnvironment()
         {
-            TranslationKeySpy = new TranslationKeySpy(CodeMemberInfoFactory);
+            TranslationKeyBuilder = new TranslationKeyGenerator(PathUtil);
+            TranslationTypesRegistry = new TranslationTypesRegistry(TestDefaultCulture, TranslationKeyBuilder);
+            TranslationKeySpy = new TranslationKeySpy(CodeMemberInfoFactory, TranslationTypesRegistry);
+            EnumTranslationService = new EnumTranslationService(CodeMemberInfoFactory, TranslationTypesRegistry); 
+            KeyGenerator = new TranslationKeyInitializer(CodeMemberInfoFactory, TranslationKeyBuilder);
         }
 
         const string TestDefaultCulture = "en";
 
-        public ICodeMemberInfoFactory CodeMemberInfoFactory { get; set; } = new CodeMemberFactory();
-        public ITranslationKeySpy TranslationKeySpy { get; set; } 
-        public ITranslationService TranslationService { get; set; } = new ReturnFallbackTransationService();
-        public ITranslationTypesRegistry TranslationTypesRegistry { get; set; } = new TranslationTypesRegistry(TestDefaultCulture);
-        public ITranslationKeyBuilder TranslationKeyBuilder { get; set; } = new TranslationKeyBuilder();
-        public ICodeMemberKeyBuilder CodeMemberKeyBuilder { get; set; } = new CodeMemberKeyBuilder();
-        
         public IPathUtil PathUtil { get; } = new PathUtil();
-        public IPathOverrides PathOverrides => null;
+        public ITranslationKeyInitializer KeyGenerator { get; } 
+        public ICodeMemberInfoFactory CodeMemberInfoFactory { get; } = new CodeMemberFactory();
+        public ITranslationKeySpy TranslationKeySpy { get; } 
+        public ITranslationService TranslationService { get; set; } = new ReturnFallbackTransationService();
+        public ITranslationTypesRegistry TranslationTypesRegistry { get; }
+        public ITranslationKeyGenerator TranslationKeyBuilder { get; }
+        public ICodeMemberKeyBuilder CodeMemberKeyBuilder { get; } = new CodeMemberKeyBuilder();
+        public IEnumTranslationService EnumTranslationService { get; } 
     }
 
     public class ReturnFallbackTransationService : ITranslationService

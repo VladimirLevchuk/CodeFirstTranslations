@@ -68,6 +68,7 @@ namespace CodeFirstTranslations
         /// Returns list of translation types
         /// </summary>
         /// <returns></returns>
+        [NotNull]
         IList<TranslationTypeInfo> ToList();
         /// <summary>
         /// Returns true if the given type is registered
@@ -76,7 +77,11 @@ namespace CodeFirstTranslations
         /// <returns></returns>
         bool Contains([NotNull] Type type);
 
+        [CanBeNull]
         string TryGetTypePath([NotNull] Type type);
+        [NotNull]
         string GetTypePath([NotNull] Type translationsType);
+        [NotNull]
+        Type GetEnumTranslationsType([NotNull] Type enumType);
     }
 }

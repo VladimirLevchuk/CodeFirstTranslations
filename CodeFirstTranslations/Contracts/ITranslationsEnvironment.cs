@@ -16,7 +16,7 @@ namespace CodeFirstTranslations
         [NotNull]
         ITranslationTypesRegistry TranslationTypesRegistry { get; }
         [NotNull]
-        ITranslationKeyBuilder TranslationKeyBuilder { get; }
+        ITranslationKeyGenerator TranslationKeyBuilder { get; }
         [NotNull]
         ICodeMemberKeyBuilder CodeMemberKeyBuilder { get; }
         [NotNull]
@@ -25,5 +25,7 @@ namespace CodeFirstTranslations
         IEnumTranslationService EnumTranslationService { get; }
         [NotNull]
         IPathUtil PathUtil { get; }
+        [NotNull]
+        ITranslationKeyInitializer KeyGenerator { get; }
     }
 }
